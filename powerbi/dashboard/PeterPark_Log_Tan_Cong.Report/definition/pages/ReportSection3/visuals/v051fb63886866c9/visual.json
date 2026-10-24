@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v051fb63886866c9",
+  "position": {
+    "x": 435,
+    "y": 425,
+    "z": 51000,
+    "height": 125,
+    "width": 405
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "46.601",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#C8102E",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Dấu vết công cụ \"Bye Bye\"",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1F3A93",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "46.601 lần ngắt kết nối \"Bye Bye\" của script brute-force; 157 dòng lộ thư viện Java JSch.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#222222"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

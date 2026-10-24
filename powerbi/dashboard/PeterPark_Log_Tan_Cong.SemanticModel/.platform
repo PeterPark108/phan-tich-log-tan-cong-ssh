@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "PeterPark_Log_Tan_Cong"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "290d0f79-bc17-4d1c-a529-552c25c490e3"
+  }
+}

@@ -1,0 +1,174 @@
+table dim_ip
+	lineageTag: a271d8b1-fa7a-482d-8bc0-e361774caade
+
+	column ip
+		dataType: string
+		lineageTag: dbc5b341-9665-49a8-88f0-f198503b8ae7
+		summarizeBy: none
+		sourceColumn: ip
+
+	column country_code
+		dataType: string
+		lineageTag: 22c84c5a-ae7d-42a5-a5bd-abbb2b23310d
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: country_code
+
+	column continent
+		dataType: string
+		lineageTag: d0d6e15a-b1cd-486b-aa8a-1fc15e9b7e94
+		summarizeBy: none
+		sourceColumn: continent
+
+	column region
+		dataType: string
+		lineageTag: 1b632283-f422-406b-97d9-fd5dd2cbe118
+		summarizeBy: none
+		sourceColumn: region
+
+	column city
+		dataType: string
+		lineageTag: 69420500-8cec-4528-9e19-7265ee45b0a2
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: city
+
+	column lat
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8c5ea203-1699-4704-81ce-2f801eb9e67c
+		dataCategory: Latitude
+		summarizeBy: sum
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+	column lon
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7bdf4ba4-6486-49f0-bb22-3c70d298b7cb
+		dataCategory: Longitude
+		summarizeBy: sum
+		sourceColumn: lon
+
+		annotation SummarizationSetBy = Automatic
+
+	column asn
+		dataType: int64
+		formatString: #,0
+		lineageTag: 81d84e9a-775f-4af7-a9d7-76e581c194df
+		summarizeBy: sum
+		sourceColumn: asn
+
+		annotation SummarizationSetBy = Automatic
+
+	column as_org
+		dataType: string
+		lineageTag: e02a2def-f1b5-4d0a-833f-36060fa9b478
+		summarizeBy: none
+		sourceColumn: as_org
+
+	column subnet24
+		dataType: string
+		lineageTag: 90c5e2cd-097e-4c1d-a183-971260768910
+		summarizeBy: none
+		sourceColumn: subnet24
+
+	column so_su_kien
+		dataType: int64
+		formatString: #,0
+		lineageTag: cad7d243-0cc6-491a-99d5-997ffa8effa2
+		summarizeBy: sum
+		sourceColumn: so_su_kien
+
+	column so_lan_thu_user
+		dataType: int64
+		formatString: #,0
+		lineageTag: 87f594e3-e871-47fd-9cc8-3aef838504ec
+		summarizeBy: sum
+		sourceColumn: so_lan_thu_user
+
+	column so_lan_root
+		dataType: int64
+		formatString: #,0
+		lineageTag: 165ad4f0-ed0a-421a-84e8-9e8fa6f9cb3f
+		summarizeBy: sum
+		sourceColumn: so_lan_root
+
+	column so_dot
+		dataType: int64
+		formatString: #,0
+		lineageTag: 1e65730b-473f-4e80-a04e-2e6058406ca2
+		summarizeBy: sum
+		sourceColumn: so_dot
+
+	column so_ngay
+		dataType: int64
+		formatString: #,0
+		lineageTag: c8c11af9-2a6e-46d6-8ea2-79c93b30fb88
+		summarizeBy: sum
+		sourceColumn: so_ngay
+
+	column lan_dau
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 5582c9ee-a3c9-4715-906c-0cc9236ee853
+		summarizeBy: none
+		sourceColumn: lan_dau
+
+		variation Variation
+			isDefault
+			relationship: 04e57c79-02a3-46c5-8c1b-3aff7ff969aa
+			defaultHierarchy: LocalDateTable_f2990b77-c549-4432-9ecd-775a5f36c481.'Date Hierarchy'
+
+	column lan_cuoi
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 9871703d-2587-434e-8cc9-b07b6616ef7a
+		summarizeBy: none
+		sourceColumn: lan_cuoi
+
+		variation Variation
+			isDefault
+			relationship: fd381107-0d7d-4cdc-889e-93908d939691
+			defaultHierarchy: LocalDateTable_736ba165-241e-4b92-941a-acf472c40dd8.'Date Hierarchy'
+
+	column phan_loai
+		dataType: string
+		lineageTag: a656d9ea-cb96-461e-b5e1-43bf723d1794
+		summarizeBy: none
+		sourceColumn: phan_loai
+
+	column hanh_vi_chinh
+		dataType: string
+		lineageTag: ba14ffc3-060b-4082-b2e2-152963e6fe10
+		summarizeBy: none
+		sourceColumn: hanh_vi_chinh
+
+	column geo_source
+		dataType: string
+		lineageTag: 30591e0d-1967-45d6-b726-f6525fe495b9
+		summarizeBy: none
+		sourceColumn: geo_source
+
+	column hang
+		dataType: int64
+		formatString: #,0
+		lineageTag: f7062919-fe14-4bb4-9966-98717c312799
+		summarizeBy: sum
+		sourceColumn: hang
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ip = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\PETTER\Desktop\python\du_an_phan_tich_log_tan_cong\powerbi\dim_ip.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed0 = Table.TransformColumnTypes(Promoted, {{"ip", type text}, {"country_code", type text}, {"continent", type text}, {"region", type text}, {"city", type text}, {"lat", type number}, {"lon", type number}, {"asn", Int64.Type}, {"as_org", type text}, {"subnet24", type text}, {"so_su_kien", Int64.Type}, {"so_lan_thu_user", Int64.Type}, {"so_lan_root", Int64.Type}, {"so_dot", Int64.Type}, {"so_ngay", Int64.Type}, {"lan_dau", type datetime}, {"lan_cuoi", type datetime}, {"phan_loai", type text}, {"hanh_vi_chinh", type text}, {"geo_source", type text}}, "en-US"),
+				    Typed = Table.ReplaceValue(Typed0, "", null, Replacer.ReplaceValue, {"ip", "country_code", "continent", "region", "city", "as_org", "subnet24", "phan_loai", "hanh_vi_chinh", "geo_source"}),
+				    Ranked = Table.AddRankColumn(Typed, "hang", {"so_su_kien", Order.Descending}, [RankKind = RankKind.Ordinal])
+				in
+				    Ranked
+

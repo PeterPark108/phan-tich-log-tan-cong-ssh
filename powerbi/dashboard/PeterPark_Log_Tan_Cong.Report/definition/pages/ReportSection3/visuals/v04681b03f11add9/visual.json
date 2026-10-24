@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v04681b03f11add9",
+  "position": {
+    "x": 850,
+    "y": 155,
+    "z": 46000,
+    "height": 125,
+    "width": 405
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "41,2%",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#C8102E",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Vài đợt dài gây hại nhất",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1F3A93",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Chỉ 7 đợt dài hơn 60 phút (0,2%) tạo 41,2% sự kiện; đợt dài nhất kéo dài 21,6 giờ.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#222222"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

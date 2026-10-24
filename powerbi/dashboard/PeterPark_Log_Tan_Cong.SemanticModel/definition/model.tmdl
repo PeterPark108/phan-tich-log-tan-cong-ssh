@@ -1,0 +1,26 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fact_su_kien","fact_dot_tan_cong","dim_ip","dim_ngay","dim_username"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_su_kien
+ref table fact_dot_tan_cong
+ref table dim_ip
+ref table dim_ngay
+ref table dim_username
+ref table DateTableTemplate_a98d0971-faa5-42b1-85c3-eb57b9b5d6bc
+ref table LocalDateTable_b4823861-6928-4214-8fdd-682739f680bd
+ref table LocalDateTable_eb2bc056-9565-4a6b-bdb7-e93d53e7e759
+ref table LocalDateTable_0679e26d-73bb-467c-9f19-4577e94415f6
+ref table LocalDateTable_f2990b77-c549-4432-9ecd-775a5f36c481
+ref table LocalDateTable_736ba165-241e-4b92-941a-acf472c40dd8
+

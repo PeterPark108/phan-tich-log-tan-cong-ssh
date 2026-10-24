@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v02354eaba384b73",
+  "position": {
+    "x": 20,
+    "y": 282,
+    "z": 23000,
+    "height": 300,
+    "width": 700
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_ip"
+                    }
+                  },
+                  "Property": "country_code"
+                }
+              },
+              "queryRef": "dim_ip.country_code",
+              "active": true
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_su_kien"
+                    }
+                  },
+                  "Property": "Sự kiện có IP"
+                }
+              },
+              "queryRef": "fact_su_kien.Sự kiện có IP"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bản đồ sự kiện theo quốc gia (vị trí IP hiện tại)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

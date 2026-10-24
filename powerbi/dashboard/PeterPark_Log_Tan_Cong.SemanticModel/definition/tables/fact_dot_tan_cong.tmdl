@@ -1,0 +1,100 @@
+table fact_dot_tan_cong
+	lineageTag: 97141da1-acc4-4cf2-b23a-6472436903db
+
+	column session_id
+		dataType: string
+		lineageTag: 3d35e5dd-522a-4968-8591-d0b230c1e6f9
+		summarizeBy: none
+		sourceColumn: session_id
+
+	column ip
+		dataType: string
+		lineageTag: 37818552-3de9-4a1c-b1e0-38dde98989a7
+		summarizeBy: none
+		sourceColumn: ip
+
+	column bat_dau
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: a80163ec-ed66-4deb-b296-7cfeb1a3d5ed
+		summarizeBy: none
+		sourceColumn: bat_dau
+
+		variation Variation
+			isDefault
+			relationship: e50118b3-6b8a-4196-8591-10264520cb5e
+			defaultHierarchy: LocalDateTable_eb2bc056-9565-4a6b-bdb7-e93d53e7e759.'Date Hierarchy'
+
+	column ket_thuc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: a1a72239-9fb0-4ebd-a564-9ee08e023f5d
+		summarizeBy: none
+		sourceColumn: ket_thuc
+
+		variation Variation
+			isDefault
+			relationship: c51fbda1-a947-41db-b5c7-a757e13b58be
+			defaultHierarchy: LocalDateTable_0679e26d-73bb-467c-9f19-4577e94415f6.'Date Hierarchy'
+
+	column so_su_kien
+		dataType: int64
+		formatString: #,0
+		lineageTag: c37326c4-9fc4-4da9-99c0-d3a9fa97bbd8
+		summarizeBy: sum
+		sourceColumn: so_su_kien
+
+	column so_lan_thu_user
+		dataType: int64
+		formatString: #,0
+		lineageTag: bb464970-fdcd-45ad-9b8f-d279ad168621
+		summarizeBy: sum
+		sourceColumn: so_lan_thu_user
+
+	column gap_trung_vi_s
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 334ab5cc-8780-478e-a921-d335553f6c6e
+		summarizeBy: sum
+		sourceColumn: gap_trung_vi_s
+
+	column thoi_luong_phut
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 1d0c9e0f-627d-42b9-bc5a-6d5f02489ed3
+		summarizeBy: sum
+		sourceColumn: thoi_luong_phut
+
+	column toc_do_moi_phut
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 9221e642-3238-40a0-9992-41bf701f3381
+		summarizeBy: sum
+		sourceColumn: toc_do_moi_phut
+
+	column hanh_vi
+		dataType: string
+		lineageTag: 1fb120ec-0226-4749-9487-441f04134364
+		summarizeBy: none
+		sourceColumn: hanh_vi
+
+	column ngay
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 94b62d81-3141-491e-9d73-38ffcfdbe1c1
+		summarizeBy: none
+		sourceColumn: ngay
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_dot_tan_cong = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\PETTER\Desktop\python\du_an_phan_tich_log_tan_cong\powerbi\fact_dot_tan_cong.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed0 = Table.TransformColumnTypes(Promoted, {{"session_id", type text}, {"ip", type text}, {"bat_dau", type datetime}, {"ket_thuc", type datetime}, {"so_su_kien", Int64.Type}, {"so_lan_thu_user", Int64.Type}, {"gap_trung_vi_s", type number}, {"thoi_luong_phut", type number}, {"toc_do_moi_phut", type number}, {"hanh_vi", type text}, {"ngay", type date}}, "en-US"),
+				    Typed = Table.ReplaceValue(Typed0, "", null, Replacer.ReplaceValue, {"session_id", "ip", "hanh_vi"})
+				in
+				    Typed
+

@@ -1,0 +1,45 @@
+relationship 0fb282fd-d1cf-4687-a5d9-4b2d28cb4e44
+	fromColumn: fact_su_kien.ip
+	toColumn: dim_ip.ip
+
+relationship 67ca6cfe-da68-46e7-b0f2-cc442c2cf18b
+	fromColumn: fact_su_kien.ngay
+	toColumn: dim_ngay.ngay
+
+relationship e2f59804-0fc5-48d7-a1fb-e92ac62c5c2b
+	fromColumn: fact_su_kien.username_key
+	toColumn: dim_username.username_key
+
+relationship 60ffa700-fb9f-4f21-88fd-3a55345e8ad2
+	fromColumn: fact_dot_tan_cong.ip
+	toColumn: dim_ip.ip
+
+relationship 0e471ba3-d0af-4d2a-bb6b-669fad8df8b3
+	fromColumn: fact_dot_tan_cong.ngay
+	toColumn: dim_ngay.ngay
+
+relationship 137faf8b-817c-4b39-aac1-455f0b8e673a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_su_kien.timestamp
+	toColumn: LocalDateTable_b4823861-6928-4214-8fdd-682739f680bd.Date
+
+relationship e50118b3-6b8a-4196-8591-10264520cb5e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_dot_tan_cong.bat_dau
+	toColumn: LocalDateTable_eb2bc056-9565-4a6b-bdb7-e93d53e7e759.Date
+
+relationship c51fbda1-a947-41db-b5c7-a757e13b58be
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_dot_tan_cong.ket_thuc
+	toColumn: LocalDateTable_0679e26d-73bb-467c-9f19-4577e94415f6.Date
+
+relationship 04e57c79-02a3-46c5-8c1b-3aff7ff969aa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_ip.lan_dau
+	toColumn: LocalDateTable_f2990b77-c549-4432-9ecd-775a5f36c481.Date
+
+relationship fd381107-0d7d-4cdc-889e-93908d939691
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_ip.lan_cuoi
+	toColumn: LocalDateTable_736ba165-241e-4b92-941a-acf472c40dd8.Date
+

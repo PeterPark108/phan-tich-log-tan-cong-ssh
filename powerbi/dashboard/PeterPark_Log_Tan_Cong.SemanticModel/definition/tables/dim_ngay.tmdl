@@ -1,0 +1,58 @@
+table dim_ngay
+	lineageTag: 5516e31c-59e1-48e9-a1ed-57d4891b262d
+	dataCategory: Time
+
+	column ngay
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: b68b3c62-8606-4ca8-b5d4-f7d3f0492c2b
+		summarizeBy: none
+		sourceColumn: ngay
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ngay_thang
+		dataType: string
+		lineageTag: cda99a75-80f8-46a4-b6e5-7e0d7c562506
+		summarizeBy: none
+		sourceColumn: ngay_thang
+		sortByColumn: ngay
+
+	column thang
+		dataType: int64
+		formatString: #,0
+		lineageTag: 6117b67f-fdf7-47b7-a6a8-c549e31c89e0
+		summarizeBy: none
+		sourceColumn: thang
+
+	column ten_thang
+		dataType: string
+		lineageTag: cf2b99a7-67c6-40cb-880e-ec4b5a8c818d
+		summarizeBy: none
+		sourceColumn: ten_thang
+
+	column ngay_trong_thang
+		dataType: int64
+		formatString: #,0
+		lineageTag: df4c7ba2-5209-4f0c-ae4e-6451ca837a8f
+		summarizeBy: none
+		sourceColumn: ngay_trong_thang
+
+	column tuan
+		dataType: string
+		lineageTag: d27b647e-e2ff-4a92-8347-f3daf0306c8a
+		summarizeBy: none
+		sourceColumn: tuan
+
+	partition dim_ngay = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\PETTER\Desktop\python\du_an_phan_tich_log_tan_cong\powerbi\dim_ngay.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed0 = Table.TransformColumnTypes(Promoted, {{"ngay", type date}, {"ngay_thang", type text}, {"thang", Int64.Type}, {"ten_thang", type text}, {"ngay_trong_thang", Int64.Type}, {"tuan", type text}}, "en-US"),
+				    Typed = Table.ReplaceValue(Typed0, "", null, Replacer.ReplaceValue, {"ngay_thang", "ten_thang", "tuan"})
+				in
+				    Typed
+

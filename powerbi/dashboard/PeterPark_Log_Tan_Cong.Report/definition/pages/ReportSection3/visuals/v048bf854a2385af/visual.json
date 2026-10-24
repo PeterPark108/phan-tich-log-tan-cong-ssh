@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v048bf854a2385af",
+  "position": {
+    "x": 435,
+    "y": 290,
+    "z": 48000,
+    "height": 125,
+    "width": 405
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "80% số giờ",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#C8102E",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Tấn công gần như không ngừng",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1F3A93",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "615/768 giờ có tấn công; 10 giờ nặng nhất chiếm 34,4%, đỉnh 02/12 lúc 15h với 3.576 sự kiện.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#222222"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

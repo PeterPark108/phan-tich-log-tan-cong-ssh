@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v02817ab1d2f9e9f",
+  "position": {
+    "x": 20,
+    "y": 6,
+    "z": 28000,
+    "height": 48,
+    "width": 1240
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "🕷️ PeterPark · Tài khoản & hành vi",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#1F3A93",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

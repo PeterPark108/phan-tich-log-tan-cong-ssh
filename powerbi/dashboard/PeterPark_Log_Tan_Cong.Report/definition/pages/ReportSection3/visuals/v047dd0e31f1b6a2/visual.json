@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v047dd0e31f1b6a2",
+  "position": {
+    "x": 20,
+    "y": 290,
+    "z": 47000,
+    "height": 125,
+    "width": 405
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "42,3%",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#C8102E",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "IP quay lại rất nguy hiểm",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1F3A93",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "72,7% IP chỉ xuất hiện 1 ngày, nhưng 504 IP quay lại tạo 42,3% sự kiện.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#222222"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

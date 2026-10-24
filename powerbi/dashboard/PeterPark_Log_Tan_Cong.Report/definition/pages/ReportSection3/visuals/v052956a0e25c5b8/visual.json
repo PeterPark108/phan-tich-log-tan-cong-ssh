@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v052956a0e25c5b8",
+  "position": {
+    "x": 850,
+    "y": 425,
+    "z": 52000,
+    "height": 125,
+    "width": 405
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "2.575",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#C8102E",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Tấn công root theo đợt",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1F3A93",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2.575 lần bị chặn vì sai quá nhiều với root, chỉ trong 6/32 ngày; log không ghi IP ở dòng này.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#222222"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

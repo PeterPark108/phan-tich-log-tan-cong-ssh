@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v0542afdba0865c7",
+  "position": {
+    "x": 20,
+    "y": 785,
+    "z": 54000,
+    "height": 26,
+    "width": 1240
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Nguồn: log SSH auth.log – SecRepo.com (Mike Sconzo), CC BY 4.0 · Vị trí IP: IP Geolocation by DB-IP (db-ip.com), CC BY 4.0 – vị trí hiện tại, không phải lúc tấn công · Năm 2000 là năm giả định, giờ server.",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#555555"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

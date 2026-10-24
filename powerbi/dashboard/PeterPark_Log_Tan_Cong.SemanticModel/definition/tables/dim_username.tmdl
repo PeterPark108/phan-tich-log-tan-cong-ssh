@@ -1,0 +1,63 @@
+table dim_username
+	lineageTag: a05b95b2-0cb5-4609-85d6-ade8dab31202
+
+	column username
+		dataType: string
+		lineageTag: 3863a537-d37d-45f7-91d6-31e9ee76ab50
+		summarizeBy: none
+		sourceColumn: username
+
+	column so_lan_thu
+		dataType: int64
+		formatString: #,0
+		lineageTag: db011dbd-e1ea-42b6-a03a-8f0e230c0d37
+		summarizeBy: sum
+		sourceColumn: so_lan_thu
+
+	column so_ip
+		dataType: int64
+		formatString: #,0
+		lineageTag: d674df38-4a55-4ce6-ba21-8aab5aea9bbf
+		summarizeBy: sum
+		sourceColumn: so_ip
+
+	column nhom_user
+		dataType: string
+		lineageTag: 6cef0541-593d-4a82-a278-f70b7e27accd
+		summarizeBy: none
+		sourceColumn: nhom_user
+
+	column do_dai
+		dataType: int64
+		formatString: #,0
+		lineageTag: a8ad7800-d9ff-446c-afad-f299499b1337
+		summarizeBy: sum
+		sourceColumn: do_dai
+
+	column username_key
+		dataType: string
+		lineageTag: bf6d7218-5760-431a-a620-62b382a21e16
+		summarizeBy: none
+		sourceColumn: username_key
+
+	column hang
+		dataType: int64
+		formatString: #,0
+		lineageTag: 20a8c74f-f916-40c5-b83c-7251a838337b
+		summarizeBy: none
+		sourceColumn: hang
+
+	partition dim_username = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\PETTER\Desktop\python\du_an_phan_tich_log_tan_cong\powerbi\dim_username.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed0 = Table.TransformColumnTypes(Promoted, {{"username", type text}, {"so_lan_thu", Int64.Type}, {"so_ip", Int64.Type}, {"nhom_user", type text}, {"do_dai", Int64.Type}}, "en-US"),
+				    Typed = Table.ReplaceValue(Typed0, "", null, Replacer.ReplaceValue, {"username", "nhom_user"}),
+				    AddKey = Table.AddColumn(Typed, "username_key", each if [username] = null or Text.Trim([username]) = "" then null else Text.Lower(Text.Trim([username])), type text),
+				    Grouped = Table.Group(AddKey, {"username_key"}, {{"username", each [username]{0}, type text}, {"so_lan_thu", each List.Sum([so_lan_thu]), Int64.Type}, {"so_ip", each List.Sum([so_ip]), Int64.Type}, {"nhom_user", each [nhom_user]{0}, type text}, {"do_dai", each [do_dai]{0}, Int64.Type}}),
+				    Ranked = Table.AddRankColumn(Grouped, "hang", {"so_lan_thu", Order.Descending}, [RankKind = RankKind.Ordinal])
+				in
+				    Ranked
+

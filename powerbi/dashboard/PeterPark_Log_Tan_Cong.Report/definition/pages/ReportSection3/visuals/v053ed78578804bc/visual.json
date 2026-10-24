@@ -1,0 +1,103 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v053ed78578804bc",
+  "position": {
+    "x": 20.073891625615762,
+    "y": 562.06896551724139,
+    "z": 53000,
+    "height": 217.80172413793102,
+    "width": 1239.5628078817733
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "🛡️ Khuyến nghị phòng thủ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#c8102e"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Tắt đăng nhập bằng mật khẩu và root (PasswordAuthentication no, PermitRootLogin no), chỉ dùng SSH key.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#1f3a93"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. Dùng fail2ban: cấm IP sai từ 5 lần/10 phút và cấm lâu hơn với IP tái phạm.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#1f3a93"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Giới hạn tốc độ kết nối: ufw limit 22/tcp, MaxStartups, MaxAuthTries 3.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#1f3a93"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. Chặn cả dải /24 hoặc nhà mạng (ASN) khi nhiều IP cùng dải tấn công.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#1f3a93"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "5. Chỉ cho IP tin cậy hoặc VPN vào cổng 22; bật LogLevel VERBOSE và cảnh báo khi vượt ngưỡng sự kiện/giờ.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#1f3a93"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "6. Xoá hoặc khoá tài khoản mặc định (pi, ubnt, oracle, test…) trên mọi máy.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#1f3a93"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

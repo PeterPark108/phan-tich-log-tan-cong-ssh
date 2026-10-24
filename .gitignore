@@ -1,0 +1,13 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.abf
+*_backup*/
+_backup_*/
+*.zip
+*.db
+*.sqlite
+*.mmdb
+dbip*
+data/auth.log
+.ipynb_checkpoints/
+__pycache__/

@@ -1,0 +1,174 @@
+table fact_su_kien
+	lineageTag: cc86683c-32dd-449f-a122-3e04ca315f80
+
+	measure 'Tổng sự kiện' = COUNTROWS ( fact_su_kien )
+		formatString: #,0
+		lineageTag: d038af54-e273-4a2e-ab96-98d89ceaad6d
+
+	measure 'Sự kiện có IP' = CALCULATE ( [Tổng sự kiện], NOT ISBLANK ( fact_su_kien[ip] ) )
+		formatString: #,0
+		lineageTag: cfc7bccc-88d5-4a2e-b203-253739c78a9e
+
+	measure 'Lần thử theo username' = CALCULATE ( [Tổng sự kiện], NOT ISBLANK ( fact_su_kien[username_key] ) )
+		formatString: #,0
+		lineageTag: 974c5f10-b885-47c6-9b30-9244b25648ea
+
+	measure 'Số IP tấn công' = DISTINCTCOUNTNOBLANK ( fact_su_kien[ip] )
+		formatString: #,0
+		lineageTag: b096b861-874f-4642-aa88-481d1650175a
+
+	measure 'Số đợt tấn công' = COUNTROWS ( fact_dot_tan_cong )
+		formatString: #,0
+		lineageTag: c6339f2a-8142-4aa9-8d71-be3d0af267d9
+
+	measure 'Số quốc gia' = CALCULATE ( DISTINCTCOUNTNOBLANK ( dim_ip[country_code] ), NOT ISBLANK ( fact_su_kien[ip] ) )
+		formatString: #,0
+		lineageTag: 4d7f49d6-e815-48e1-8661-3502dc3d52a2
+
+	measure 'Lần thử username sai' = CALCULATE ( [Tổng sự kiện], fact_su_kien[event_type] = "invalid_user" )
+		formatString: #,0
+		lineageTag: 9ec2263e-f1c4-4b14-a2c6-25132c804353
+
+	measure 'Lần tấn công root' = CALCULATE ( [Tổng sự kiện], fact_su_kien[event_type] = "too_many_auth_failures" )
+		formatString: #,0
+		lineageTag: ad6af6d5-1039-4d03-8659-03d5795ab788
+
+	measure 'Số username khác nhau' = CALCULATE ( DISTINCTCOUNTNOBLANK ( fact_su_kien[username_key] ), fact_su_kien[event_type] = "invalid_user" )
+		formatString: #,0
+		lineageTag: bca60024-4b68-4625-9c81-c05e18a96967
+
+	measure 'Sự kiện / IP' = DIVIDE ( [Sự kiện có IP], [Số IP tấn công] )
+		formatString: #,0.0
+		lineageTag: ae404e80-bcbc-4f4d-8139-fb61bb30e6ee
+
+	measure 'Sự kiện TB / ngày' = AVERAGEX ( VALUES ( dim_ngay[ngay] ), [Tổng sự kiện] )
+		formatString: #,0
+		lineageTag: e12edf34-51ce-451b-8cc3-2527c7291ec8
+
+	measure 'Ngày cao điểm' = MAXX ( TOPN ( 1, VALUES ( dim_ngay[ngay_thang] ), [Tổng sự kiện] ), dim_ngay[ngay_thang] )
+		lineageTag: b8d9c721-51a0-4fe8-8027-e1c29f0ea895
+
+	measure 'Sự kiện ngày cao điểm' = MAXX ( VALUES ( dim_ngay[ngay] ), [Tổng sự kiện] )
+		formatString: #,0
+		lineageTag: 73ef0ddc-87c7-42b9-bb22-32f1aee5ce74
+
+	measure 'IP mạnh nhất' = MAXX ( TOPN ( 1, FILTER ( VALUES ( dim_ip[ip] ), NOT ISBLANK ( dim_ip[ip] ) ), [Sự kiện có IP] ), dim_ip[ip] )
+		lineageTag: 08fe123a-879b-4a62-8c29-f93d236cdc4b
+
+	measure '% Sự kiện' = DIVIDE ( [Tổng sự kiện], CALCULATE ( [Tổng sự kiện], ALL ( fact_su_kien ) ) )
+		formatString: 0.0%
+		lineageTag: c32b309b-e784-4a1d-8fcd-1c980a20c7df
+
+	measure '% Top 10 IP' = VAR top10 = TOPN ( 10, FILTER ( ALL ( dim_ip[ip] ), NOT ISBLANK ( dim_ip[ip] ) ), [Sự kiện có IP] ) RETURN DIVIDE ( CALCULATE ( [Sự kiện có IP], top10 ), CALCULATE ( [Sự kiện có IP], ALL ( dim_ip ) ) )
+		formatString: 0.0%
+		lineageTag: 436c0d8a-4594-4ddb-aab0-fa57d5515584
+
+	measure 'Pareto % cộng dồn' = VAR cur = [Tổng sự kiện] VAR tong = CALCULATE ( [Tổng sự kiện], ALL ( dim_ip ) ) VAR cong_don = SUMX ( FILTER ( ALL ( dim_ip ), dim_ip[so_su_kien] >= MAX ( dim_ip[so_su_kien] ) ), dim_ip[so_su_kien] ) RETURN IF ( NOT ISBLANK ( cur ), DIVIDE ( cong_don, tong ) )
+		formatString: 0.0%
+		lineageTag: f44194e3-479b-4886-8302-ecc45617ba3e
+
+	measure 'IP quay lại (≥2 ngày)' = CALCULATE ( DISTINCTCOUNT ( dim_ip[ip] ), dim_ip[so_ngay] >= 2 )
+		formatString: #,0
+		lineageTag: decaab55-67db-4d4e-bcae-b22b0967662c
+
+	measure '% IP chỉ 1 ngày' = DIVIDE ( CALCULATE ( COUNTROWS ( dim_ip ), dim_ip[so_ngay] = 1 ), COUNTROWS ( dim_ip ) )
+		formatString: 0.0%
+		lineageTag: ea78d267-5b73-40ee-9509-192663dae077
+
+	measure 'Thời lượng đợt TB (phút)' = AVERAGE ( fact_dot_tan_cong[thoi_luong_phut] )
+		formatString: #,0.0
+		lineageTag: b649537e-1ca8-449b-952a-72f425e48972
+
+	measure 'Tốc độ đỉnh (sự kiện/phút)' = MAX ( fact_dot_tan_cong[toc_do_moi_phut] )
+		formatString: #,0.0
+		lineageTag: 6626077a-d1ae-409b-b4d4-a588f8fdf695
+
+	measure 'Đợt bot tốc độ cao' = CALCULATE ( [Số đợt tấn công], fact_dot_tan_cong[hanh_vi] = "Bot tốc độ cao (≤5s)" )
+		formatString: #,0
+		lineageTag: 883d5c5a-7c3e-43a8-814a-47bc5c07ed1f
+
+	measure '% Sự kiện do bot nhanh' = DIVIDE ( CALCULATE ( SUM ( fact_dot_tan_cong[so_su_kien] ), fact_dot_tan_cong[hanh_vi] = "Bot tốc độ cao (≤5s)" ), SUM ( fact_dot_tan_cong[so_su_kien] ) )
+		formatString: 0.0%
+		lineageTag: 8f8f08dd-21b7-4562-b914-f68edb5c4ee1
+
+	column event_id
+		dataType: int64
+		formatString: #,0
+		lineageTag: 49cd79ea-cf96-42d9-b949-2cd2a3d7bf94
+		summarizeBy: sum
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 0a0c5328-1a57-47a7-94b1-ad5e934812a4
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		variation Variation
+			isDefault
+			relationship: 137faf8b-817c-4b39-aac1-455f0b8e673a
+			defaultHierarchy: LocalDateTable_b4823861-6928-4214-8fdd-682739f680bd.'Date Hierarchy'
+
+	column ngay
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 75c6448b-245e-4c07-a180-5ba70dd4fa14
+		summarizeBy: none
+		sourceColumn: ngay
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column gio
+		dataType: int64
+		formatString: #,0
+		lineageTag: 3d370d21-ce6d-44d0-a55d-cd96e49918a6
+		summarizeBy: sum
+		sourceColumn: gio
+
+		annotation SummarizationSetBy = Automatic
+
+	column ip
+		dataType: string
+		lineageTag: 2acf962a-1e62-483e-85ad-4ff7eda470da
+		summarizeBy: none
+		sourceColumn: ip
+
+	column username
+		dataType: string
+		lineageTag: 9a4b3f2b-bfe0-4791-83b5-b158d15082bc
+		summarizeBy: none
+		sourceColumn: username
+
+	column event_type
+		dataType: string
+		lineageTag: b2b5688e-3665-462d-9300-61a155424e58
+		summarizeBy: none
+		sourceColumn: event_type
+
+	column session_id
+		dataType: string
+		lineageTag: 0a937e72-dc1d-4e9a-9435-a328b2ad6cb2
+		summarizeBy: none
+		sourceColumn: session_id
+
+	column username_key
+		dataType: string
+		lineageTag: 330045e0-4e20-4b80-b7ef-f466fe43c8a2
+		summarizeBy: none
+		sourceColumn: username_key
+
+	partition fact_su_kien = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\PETTER\Desktop\python\du_an_phan_tich_log_tan_cong\powerbi\fact_su_kien.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed0 = Table.TransformColumnTypes(Promoted, {{"event_id", Int64.Type}, {"timestamp", type datetime}, {"ngay", type date}, {"gio", Int64.Type}, {"ip", type text}, {"username", type text}, {"event_type", type text}, {"session_id", type text}}, "en-US"),
+				    Typed = Table.ReplaceValue(Typed0, "", null, Replacer.ReplaceValue, {"ip", "username", "event_type", "session_id"}),
+				    AddKey = Table.AddColumn(Typed, "username_key", each if [username] = null or Text.Trim([username]) = "" then null else Text.Lower(Text.Trim([username])), type text)
+				in
+				    AddKey
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "PeterPark_Log_Tan_Cong"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "eb6c7721-582e-4b7d-bb90-65cc743b3df3"
+  }
+}
