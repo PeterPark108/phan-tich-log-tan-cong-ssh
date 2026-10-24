@@ -1,6 +1,6 @@
 # 🕷️ SSH Attack Log Analysis · Phân tích log tấn công SSH
 
-**Author / Tác giả:** Nguyễn Văn Tùng (PeterPark) · [Portfolio](https://github.com/PeterPark108)
+**Author / Tác giả:** Nguyễn Văn Tùng (PeterPark) · [Portfolio](https://peterpark108.github.io/) · [GitHub](https://github.com/PeterPark108)
 
 A data-analytics × cybersecurity project: parsing a **real public Linux `auth.log`** (86,839 lines, 30 Nov – 31 Dec) to answer *who attacks, when, which accounts they try, how automated they are, and how to defend*. Result: a Python/SQL notebook with 14 charts and a 4-page **Power BI** dashboard (with slicers and an Insight page).
 
